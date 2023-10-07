@@ -1,4 +1,14 @@
 terraform {
+
+
+  cloud {
+    organization = "dev-glo"
+    workspaces {
+      name = "Terrahouse-1"
+    }
+  }
+
+
   required_providers {
     random = {
       source = "hashicorp/random"
@@ -11,9 +21,11 @@ terraform {
     }
   }
 }
-provider "aws"{
-  #Configuration options
+
+provider "aws" {
+    # Configuration options
 }
+  
 
 provider "random" {
   # Configuration options
