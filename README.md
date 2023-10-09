@@ -2,8 +2,8 @@
 * We also created a provider called random .
 
 ## WEEKLY JOURNALS
-* [Notes](journals/ProjectNotes.md)
-* [Notes](journals/ProjectNotes2.md)
+* [Notes1](journals/ProjectNotes.md)
+* [Notes2](journals/ProjectNotes2.md)
   
 ## Extras
 * [Github Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
