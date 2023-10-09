@@ -3,6 +3,7 @@
 
 ## WEEKLY JOURNALS
 * [Notes](journals/ProjectNotes.md)
+* [Notes](journals/ProjectNotes2.md)
   
 ## Extras
 * [Github Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
