@@ -106,6 +106,9 @@ Setting and Unsetting Env Vars
 
 In the terminal we can set using `export HELLO='world`
 
+eg. ``export AWS-SECRET-KEY='JEBRHBhurg``
+
+
 In the terminal we unset using `unset HELLO`
 
 We can set an env var temporarily when just running a command
