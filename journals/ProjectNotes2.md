@@ -15,9 +15,35 @@ PROJECT_ROOT
 
 [Standard Module Structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
 
+### The Root Module
+Every Terraform configuration has at least one module, known as its root module, which consists of the resources defined in the ``.tf `` files in the main working directory.
+
 ### Terraform Cloud Variables
 
-Input variables let you customize aspects of Terraform modules without altering the module's own source code. This functionality allows you to share modules across different Terraform configurations, making your module composable and reusable.
+Input variables let you customize aspects of Terraform modules without altering the module's own source code. This functionality allows you to share modules across different Terraform configurations, making your module composable and reusable. 
+
+setting variables means connecting a resource to a variable which you can use the variable name to call back that reosurce. 
+
+This is how we define a variable in the terraform.tfvars file
+```
+variable "image_id" {
+  type        = string
+  description = "The id of the machine image (AMI) to use for the server."
+}
+```
+Here we are setting the variable
+```
+resource "aws_instance" "example" {
+  instance_type = "t2.micro"
+  ami           = var.image_id
+}
+```
+Here we are using the variable name to apply the resource 
+```
+terraform apply -var="image_id=ami-abc123"
+terraform apply -var='image_id_list=["ami-abc123","ami-def456"]' -var="instance_type=t2.micro"
+terraform apply -var='image_id_map={"us-east-1":"ami-abc123","us-east-2":"ami-def456"}'
+```
 
 Modules are containers for multiple resources that are used together. A module consists of a collection of .tf and/or .tf.json files kept together in a directory.
 
@@ -36,7 +62,14 @@ We can use the `-var` flag to set an input variable or override a variable in th
 
 ### var-file flag
 
-- TODO: document this flag
+## Variable Definitions (.tfvars) Files
+To set lots of variables, it is more convenient to specify their values in a variable definitions file (with a filename ending in either ``.tfvars`` or ``.tfvars.json)`` and then specify that file on the command line with ``-var-file``:
+
+Note: This is how Terraform Cloud passes workspace variables to Terraform.
+
+``
+terraform apply -var-file="testing.tfvars"
+``
 
 ### terraform.tvfars
 
@@ -44,4 +77,29 @@ This is the default file to load in terraform variables in blunk
 
 ### auto.tfvars
 
-- TODO: document this functionality for terraform cloud
+Terraform allows you to define variable files called ``*.tfvars`` to create a reusable file for all the variables for a project. The following is an example that covers all of the required variables to run a majority of the Terraform examples in this repository.
+
+This means when you create a variable with this : ``*.tfvars`` you can use it to overide any environment.
+## Environment Variables
+As a fallback for the other ways of defining variables, Terraform searches the environment of its own process for environment variables named ``TF_VAR_`` followed by the name of a declared variable.
+
+This can be useful when running Terraform in automation, or when running a sequence of Terraform commands in succession with the same variables. For example, at a ``bash`` prompt on a Unix system:
+```sh
+$ export TF_VAR_image_id=ami-abc123
+$ terraform plan
+```
+
+
+On operating systems where environment variable names are case-sensitive, Terraform matches the variable name exactly as given in configuration, and so the required environment variable name will usually have a mix of upper and lower case letters as in the above example.
+
+### Variable Definition Precedence
+The above mechanisms for setting variables can be used together in any combination. If the same variable is assigned multiple values, Terraform uses the last value it finds, overriding any previous values. Note that the same variable cannot be assigned multiple values within a single source.
+
+Terraform loads variables in the following order, with later sources taking precedence over earlier ones:
+
+Environment variables
+The ``terraform.tfvars`` file, if present.
+The ``terraform.tfvars.json`` file, if present.
+Any ``*.auto.tfvars`` or ``*.auto.tfvars.json`` files, processed in lexical order of their filenames.
+Any ``-var`` and ``-var-file`` options on the command line, in the order they are provided. (This includes variables set by a Terraform Cloud workspace.)
+
