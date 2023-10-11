@@ -17,6 +17,10 @@ PROJECT_ROOT
 
 ### Terraform Cloud Variables
 
+Input variables let you customize aspects of Terraform modules without altering the module's own source code. This functionality allows you to share modules across different Terraform configurations, making your module composable and reusable.
+
+Modules are containers for multiple resources that are used together. A module consists of a collection of .tf and/or .tf.json files kept together in a directory.
+
 In terraform we can set two kind of variables:
 - Enviroment Variables - those you would set in your bash terminal eg. AWS credentials
 - Terraform Variables - those that you would normally set in your tfvars file eg. user_uuid
