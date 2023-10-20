@@ -1,3 +1,4 @@
+
 variable "user_uuid" {
    description = "UUID for the user"
    type        = string
@@ -7,15 +8,16 @@ variable "user_uuid" {
       }
     }
 
-variable "bucket_name" {
-  description = "The name of the bucket"
-  type = string
+#variable "bucket_name" {
+  #description = "The name of the bucket"
+  #type = string
+  #default     = "null"
 
-  validation {
-    condition        = (
-      length(var.bucket_name) >= 3 && length(var.bucket_name) <= 63 &&
-      can(regex("^[a-z0-9[a-z0-9-.]*][a-z0-9]$",var.bucket_name))
-    )
-    error_message = "The bucket name must be between 3 and 63 characters, "
-  }
-}
+  #validation {
+    #condition        = (
+      #length(var.bucket_name) >= 3 && length(var.bucket_name) <= 63 &&
+      #can(regex("^[a-z0-9[a-z0-9-.]*][a-z0-9]$",var.bucket_name))
+    #)
+    #error_message = "The bucket name must be between 3 and 63 characters"
+  #}
+#}
