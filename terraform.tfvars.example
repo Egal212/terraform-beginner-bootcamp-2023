@@ -1,2 +1,4 @@
 #user_uuid= "c2147990-51a8-49cf-9b63-5fa5197e4011"
-#bucket_name = "website4000.bucket-21"
+#bucket_name = "website4000.bucket"
+index_html_filepath = "/workspace/terraform-beginner-bootcamp-2023/public/index.html"
+error_html_filepath = "/workspace/terraform-beginner-bootcamp-2023/public/error.html"
