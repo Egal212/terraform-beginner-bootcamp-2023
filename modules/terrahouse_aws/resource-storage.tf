@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "website_bucket" {
     key    = "index.html"
     source = workspace/terraform-beginner-bootcamp-2023/public/index.html
 
-    etag = filemd5(/workspace/terraform-beginner-bootcamp-2023/public/index.html)
+    etag = filemd5(workspace/terraform-beginner-bootcamp-2023/public/index.html)
   }
 
   resource "aws_s3_object" "error-html" {
@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "website_bucket" {
     key    = "error.html"
     source = workspace/terraform-beginner-bootcamp-2023/public/error.html
 
-    etag = filemd5(/workspace/terraform-beginner-bootcamp-2023/public/erro.html)
+    etag = filemd5(workspace/terraform-beginner-bootcamp-2023/public/erro.html)
   }
 
   resource "aws_s3_bucket_policy" "bucket_policy" {
