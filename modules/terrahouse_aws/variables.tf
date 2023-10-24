@@ -15,8 +15,8 @@ variable "user_uuid" {
       #validation {
         #condition = fileexists(var.index_html_filepath)
         #error_message = "The provided path for index.html does not exist"
-      }
-    }
+      #}
+   # }
     
      #variable "error_html_filepath" {
       #description = "The file path for error.html"
@@ -25,8 +25,8 @@ variable "user_uuid" {
       #validation {
         #condition = fileexists(var.error_html_filepath)
         #error_message = "The provided path for error.html does not exist"
-      }
-    }
+     # }
+   # }
 # variable "bucket_name" {
 #   description = "The name of the S3 bucket"
 #   type = string
