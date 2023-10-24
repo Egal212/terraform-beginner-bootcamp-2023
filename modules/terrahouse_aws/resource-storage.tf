@@ -23,17 +23,17 @@ resource "aws_s3_bucket" "website_bucket" {
   resource "aws_s3_object" "index-html" {
     bucket = "website_bucket"
     key    = "index.html"
-    source = var.index_html_filepath
+    source = /workspace/terraform-beginner-bootcamp-2023/public/index.html
 
-    etag = filemd5(var.index_html_filepath)
+    etag = filemd5(/workspace/terraform-beginner-bootcamp-2023/public/index.html)
   }
 
   resource "aws_s3_object" "error-html" {
     bucket = "website_bucket"
     key    = "error.html"
-    source = var.error_html_filepath
+    source = /workspace/terraform-beginner-bootcamp-2023/public/error.html
 
-    etag = filemd5(var.error_html_filepath)
+    etag = filemd5(/workspace/terraform-beginner-bootcamp-2023/public/erro.html)
   }
 
   resource "aws_s3_bucket_policy" "bucket_policy" {
