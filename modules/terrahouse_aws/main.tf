@@ -13,40 +13,5 @@ required_providers  {
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 
 
-
-resource "aws_s3_bucket" "website_bucket" {
-    bucket = "website4565.bucket"
-    
-
- tags = {
-    UserUuid = var.user_uuid
-   }
- } 
-
- resource "aws_s3_bucket_website_configuration" "website_configuration" {
-  bucket = "website4565.bucket"
-
-  index_document {
-    suffix = "index.html"
-  }
-
-  error_document {
-    key = "error.html"
-  }
-}
-
-  resource "aws_s3_object" "index-html" {
-    bucket = "website4565.bucket"
-    key    = "index.html"
-    source = var.index_html_filepath
-
-    etag = filemd5(var.index_html_filepath)
-  }
-
-  resource "aws_s3_object" "error-html" {
-    bucket = "website4565.bucket"
-    key    = "error.html"
-    source = var.error_html_filepath
-
-    etag = filemd5(var.error_html_filepath)
-  }
+#[Caller Identity link](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)
+data "aws_caller_identity""current" {}
